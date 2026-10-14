@@ -32,7 +32,7 @@ logo: letters built from cubes, drawn in isometric projection with matplotlib's 
 ## Install
 
 ```bash
-pip install git+https://github.com/lawrenceberry/jaxogo.git
+pip install jaxogo
 ```
 
 ## Quickstart
