@@ -1,0 +1,78 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      force_badge:
+        description: >
+          Rewrite the coverage gist even when the percentage is unchanged.
+          The action skips an identical write, so this is what proves the
+          badge path works end to end after rotating GIST_TOKEN.
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          python-version: ${{ matrix.python }}
+
+      - name: Install
+        run: uv sync --frozen
+
+      - name: Tests
+        run: >
+          uv run --no-sync pytest -q
+          --cov --cov-report=xml --cov-report=term-missing:skip-covered
+
+      - name: Coverage total
+        id: coverage
+        run: echo "percent=$(uv run --no-sync coverage report --format=total)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-${{ matrix.python }}-${{ github.run_id }}
+          path: coverage.xml
+          if-no-files-found: ignore
+
+      - name: Update the coverage badge
+        # Only from main and from one Python, and only once the gist is set
+        # up: a pull request from a fork gets no secrets, and the badge reports
+        # the state of main. The gist is named by the repository variable
+        # `COVERAGE_GIST_ID` and written with the secret `GIST_TOKEN`, a token
+        # carrying the `gist` scope.
+        if: >
+          github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+          && matrix.python == '3.13' && vars.COVERAGE_GIST_ID != ''
+        uses: schneegans/dynamic-badges-action@v1.9.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gistID: ${{ vars.COVERAGE_GIST_ID }}
+          filename: jaxogo-coverage.json
+          label: coverage
+          message: ${{ steps.coverage.outputs.percent }}%
+          valColorRange: ${{ steps.coverage.outputs.percent }}
+          minColorRange: 50
+          maxColorRange: 90
+          # Off by default so an unchanged percentage leaves the gist, and its
+          # revision history, alone.
+          forceUpdate: ${{ inputs.force_badge || false }}

@@ -11,6 +11,8 @@ authors = [
 requires-python = ">=3.13"
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Multimedia :: Graphics",
 ]
 dependencies = [
@@ -31,9 +33,14 @@ build-backend = "hatchling.build"
 dev = [
     "pre-commit>=4.7.0",
     "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
     "ruff>=0.17.0",
 ]
 
 [tool.ruff.lint]
 # On top of the default `select`, enable imports sorting
 extend-select = ["I"]
+
+[tool.coverage.run]
+source = ["jaxogo"]
+branch = true

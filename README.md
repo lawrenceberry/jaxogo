@@ -2,7 +2,18 @@
   <img alt="jaxogo" src="https://raw.githubusercontent.com/lawrenceberry/jaxogo/main/examples/jaxogo.svg" width="600">
 </p>
 
+<!--
+The coverage badge reads jaxogo-coverage.json from a gist that the `tests`
+workflow rewrites on every push to main; the id below is the repository
+variable COVERAGE_GIST_ID.
+-->
 <p align="center">
+  <a href="https://github.com/lawrenceberry/jaxogo/actions/workflows/tests.yml"><img alt="tests" src="https://github.com/lawrenceberry/jaxogo/actions/workflows/tests.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/lawrenceberry/jaxogo/actions/workflows/tests.yml"><img alt="coverage" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Flawrenceberry%2Fb451e14a9620fabb0d49c345f13b5414%2Fraw%2Fjaxogo-coverage.json"></a>
+  <a href="https://github.com/lawrenceberry/jaxogo/actions/workflows/lint.yml"><img alt="lint" src="https://github.com/lawrenceberry/jaxogo/actions/workflows/lint.yml/badge.svg?branch=main"></a>
+  <a href="https://pypi.org/project/jaxogo/"><img alt="PyPI" src="https://img.shields.io/pypi/v/jaxogo"></a>
+  <a href="https://pypi.org/project/jaxogo/"><img alt="Downloads" src="https://img.shields.io/pypi/dm/jaxogo"></a>
+  <a href="https://pypi.org/project/jaxogo/"><img alt="Python" src="https://img.shields.io/pypi/pyversions/jaxogo"></a>
   <a href="https://github.com/lawrenceberry/jaxogo/blob/main/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
 </p>
 
