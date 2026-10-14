@@ -9,10 +9,19 @@ authors = [
     { name = "Lawrence Berry", email = "lawrenceberry@outlook.com" }
 ]
 requires-python = ">=3.13"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Graphics",
+]
 dependencies = [
     "matplotlib>=3.11.2",
     "numpy>=2.5.4",
 ]
+
+[project.urls]
+Homepage = "https://github.com/lawrenceberry/jaxogo"
+Repository = "https://github.com/lawrenceberry/jaxogo"
+Issues = "https://github.com/lawrenceberry/jaxogo/issues"
 
 [build-system]
 requires = ["hatchling"]

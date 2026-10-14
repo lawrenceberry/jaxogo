@@ -1,9 +1,9 @@
 <p align="center">
-  <img alt="jaxogo" src="examples/jaxogo.svg" width="600">
+  <img alt="jaxogo" src="https://raw.githubusercontent.com/lawrenceberry/jaxogo/main/examples/jaxogo.svg" width="600">
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
+  <a href="https://github.com/lawrenceberry/jaxogo/blob/main/LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
 </p>
 
 <p align="center">
@@ -48,7 +48,7 @@ jaxogo("numpy", "numpy.svg", palettes=[("#f7c948", "#b8860b", "#daa520")])
 ```
 
 `uv run examples/generate_examples.py` writes logos for `jaxogo`, `hello world`, `modax` and a
-dozen JAX-based libraries (Flax, Optax, Equinox, Diffrax, …) into [`examples/`](examples/).
+dozen JAX-based libraries (Flax, Optax, Equinox, Diffrax, …) into [`examples/`](https://github.com/lawrenceberry/jaxogo/tree/main/examples).
 
 ## Development
 
@@ -73,7 +73,7 @@ own apart from the crossbar, borrowing the J's stem as its left leg and the X's 
 
 ## License
 
-jaxogo is released under the [MIT License](LICENSE).
+jaxogo is released under the [MIT License](https://github.com/lawrenceberry/jaxogo/blob/main/LICENSE).
 
 ## Acknowledgement
 
