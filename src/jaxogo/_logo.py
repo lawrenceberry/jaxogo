@@ -74,7 +74,9 @@ def _column(voxels: frozenset[Voxel], x: int) -> set[tuple[int, int]]:
     return {(vy, vz) for vx, vy, vz in voxels if vx == x}
 
 
-def _try_join(placed: Sequence[_Placed], glyph: frozenset[Voxel]) -> frozenset[Voxel] | None:
+def _try_join(
+    placed: Sequence[_Placed], glyph: frozenset[Voxel]
+) -> frozenset[Voxel] | None:
     """Overlap ``glyph`` with the previous letter so that they share a stroke.
 
     The JAX logo shares strokes between its letters: the stem of the J is the
@@ -198,7 +200,11 @@ def _face_colors(
     for i, p in enumerate(placed):
         for v in p.voxels:
             owners.setdefault(v, []).append(i)
-    tops_right = {(min(idx), max(idx)) for (_, _, z), idx in owners.items() if z > 0 and len(idx) > 1}
+    tops_right = {
+        (min(idx), max(idx))
+        for (_, _, z), idx in owners.items()
+        if z > 0 and len(idx) > 1
+    }
     filled = set(owners)
     colors = {}
     for v, idx in owners.items():
@@ -256,7 +262,9 @@ def _render_svg(colors: dict[tuple[Voxel, str], str], edge_color: str) -> str:
         fig.canvas.draw()
         to_px = ax.transData.transform
         proj = ax.get_proj()
-        ex, ey, _ = proj3d.proj_transform(np.array([0.0, 1.0]), np.zeros(2), np.zeros(2), proj)
+        ex, ey, _ = proj3d.proj_transform(
+            np.array([0.0, 1.0]), np.zeros(2), np.zeros(2), proj
+        )
         edge = np.ptp(to_px(np.column_stack([ex, ey])), axis=0)
         scale = CUBE_SIZE / float(np.hypot(*edge))
         w, h = fig.get_size_inches()
@@ -308,11 +316,12 @@ def jaxogo(
         The SVG document as a string.
     """
     if not palettes or any(len(p) != 3 for p in palettes):
-        raise ValueError("palettes must be a non-empty sequence of (top, front, side) colours")
+        raise ValueError(
+            "palettes must be a non-empty sequence of (top, front, side) colours"
+        )
     placed = _layout(text, ligatures)
     svg = _render_svg(_face_colors(placed, palettes), edge_color)
     if path is not None:
         with open(path, "w", encoding="utf-8") as f:
             f.write(svg)
     return svg
-

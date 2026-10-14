@@ -1,3 +1,4 @@
+import itertools
 import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -125,13 +126,20 @@ def test_rejects_bad_text(text):
 @pytest.mark.parametrize("text", ["JAX", "MODAX"])
 def test_neighbouring_letters_share_a_stroke(text):
     placed = _layout(text, ligatures=True)
-    for a, b in zip(placed, placed[1:]):
+    for a, b in itertools.pairwise(placed):
         assert len(a.voxels & b.voxels) >= 3, (a.char, b.char)
 
 
 def test_round_letters_leave_out_their_corners():
     left, right = min, max
-    corners = {"B": [right], "D": [right], "C": [left], "G": [left], "Q": [left], "O": [left, right]}
+    corners = {
+        "B": [right],
+        "D": [right],
+        "C": [left],
+        "G": [left],
+        "Q": [left],
+        "O": [left, right],
+    }
     for char, sides in corners.items():
         voxels = GLYPHS[char]
         for side in sides:

@@ -173,7 +173,10 @@ def _parse(char: str, rows: tuple[str, ...]) -> frozenset[Voxel]:
     return frozenset(voxels)
 
 
-GLYPHS: dict[str, frozenset[Voxel]] = {c: _parse(c, rows) for c, rows in _BITMAPS.items()}
+GLYPHS: dict[str, frozenset[Voxel]] = {
+    c: _parse(c, rows) for c, rows in _BITMAPS.items()
+}
 JOINING_GLYPHS: dict[str, tuple[tuple[str, frozenset[Voxel]], ...]] = {
-    c: tuple((side, _parse(c, rows)) for side, rows in forms) for c, forms in _JOINING_BITMAPS.items()
+    c: tuple((side, _parse(c, rows)) for side, rows in forms)
+    for c, forms in _JOINING_BITMAPS.items()
 }

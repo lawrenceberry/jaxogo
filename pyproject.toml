@@ -20,5 +20,11 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "pre-commit>=4.7.0",
     "pytest>=9.1.1",
+    "ruff>=0.17.0",
 ]
+
+[tool.ruff.lint]
+# On top of the default `select`, enable imports sorting
+extend-select = ["I"]

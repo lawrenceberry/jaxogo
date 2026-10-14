@@ -54,6 +54,7 @@ dozen JAX-based libraries (Flax, Optax, Equinox, Diffrax, …) into [`examples/`
 
 ```bash
 uv run pytest
+uv run pre-commit install  # once: run ruff linting and formatting on every commit
 ```
 
 The tests compare `jaxogo("JAX")` polygon by polygon against the original logo in

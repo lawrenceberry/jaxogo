@@ -1,0 +1,17 @@
+# https://pre-commit.com -- install the hooks once with `uv run pre-commit
+# install`, after which every `git commit` runs ruff on the files being
+# committed.
+#
+# The revision below is pinned to the ruff version in uv.lock, so the hook and
+# `uv run ruff` cannot disagree about what counts as formatted. Bump them
+# together.
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.0
+    hooks:
+      # Lint before format: `--fix` can leave a rewritten line the formatter
+      # then wants to wrap differently, and this way the formatter has the last
+      # word rather than a second commit.
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
