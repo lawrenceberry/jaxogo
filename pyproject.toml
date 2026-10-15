@@ -8,16 +8,18 @@ license-files = ["LICENSE"]
 authors = [
     { name = "Lawrence Berry", email = "lawrenceberry@outlook.com" }
 ]
-requires-python = ">=3.13"
+requires-python = ">=3.11"
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Topic :: Multimedia :: Graphics",
 ]
 dependencies = [
-    "matplotlib>=3.11.2",
-    "numpy>=2.5.4",
+    "matplotlib>=3.6",
+    "numpy>=1.24",
 ]
 
 [project.urls]
