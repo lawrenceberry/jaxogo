@@ -1,6 +1,6 @@
 [project]
 name = "jaxogo"
-version = "0.1.0"
+version = "0.1.1"
 description = "Voxel SVG logos in the style of the JAX logo"
 readme = "README.md"
 license = "MIT"
